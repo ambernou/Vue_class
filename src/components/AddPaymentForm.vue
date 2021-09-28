@@ -13,9 +13,14 @@
 <script>
 export default {
   name: 'AddPaymentForm',
+  props: {
+    itemId: {
+      type: Number
+    }
+  },
   data () {
     return {
-      id: '',
+      id: this.itemId,
       date: '',
       category: '',
       amount: '',
@@ -34,7 +39,7 @@ export default {
   methods: {
     onSaveClick () {
       const data = {
-        id: 5, // пока сделала заглушку, без счетчика
+        id: ++this.id,
         date: this.date || this.getCurrentDate,
         category: this.category,
         amount: this.amount
@@ -43,7 +48,7 @@ export default {
     },
     showBtn () {
       this.showAddNewPayment = !this.showAddNewPayment
-      console.log(this.showAddNewPayment)
+      // console.log(this.showAddNewPayment)
     }
   }
 }

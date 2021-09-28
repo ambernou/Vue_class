@@ -4,7 +4,7 @@
       <div class="header">My Personal costs</div>
     </header>
     <main>
-      <AddPaymentForm @emitName="methodName" />
+      <AddPaymentForm @emitName="methodName" :itemId="itemId"/>
       <PaymentsDisplay :items="paymentsList"/>
     </main>
   </div>
@@ -21,7 +21,8 @@ export default {
     AddPaymentForm
   },
   data: () => ({
-    paymentsList: []
+    paymentsList: [],
+    itemId: 0
   }),
   methods: {
     fetchData () {
@@ -48,10 +49,13 @@ export default {
     },
     methodName (data) {
       this.paymentsList = [...this.paymentsList, data]
+      this.itemId = this.paymentsList[this.paymentsList.length - 1].id
+      console.log(this.itemId)
     }
   },
   created () {
     this.paymentsList = this.fetchData()
+    this.itemId = this.paymentsList[this.paymentsList.length - 1].id
   }
 }
 </script>
