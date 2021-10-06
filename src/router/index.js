@@ -4,6 +4,7 @@ import Dashboard from '../views/Dashboard'
 import DashboardWithPage from '../views/DashboardWithPage'
 import About from '../views/About'
 import NotFound from '../views/NotFound'
+import AddPaymentForm from '../components/AddPaymentForm'
 
 Vue.use(Router)
 
@@ -15,18 +16,28 @@ const router = new Router({
       name: 'Dashboard',
       component: Dashboard
     },
-    {
-      path: '/dashboard/add/payment/:category',
-      name: 'Dashboard',
-      component: Dashboard,
-      props: {
-        routeShow: ''
-      }
-    },
+    // {
+    //   path: '/dashboard/add/payment/:category',
+    //   name: 'Dashboard',
+    //   component: Dashboard,
+    //   props: {
+    //     routeShow: ''
+    //   }
+    // },
     {
       path: '/dashboardWithPage',
       name: 'DashboardWithPage',
       component: DashboardWithPage
+    },
+    {
+      path: '/add/payment',
+      name: 'AddPaymentForm',
+      component: AddPaymentForm
+    },
+    {
+      path: '/add/payment/:category',
+      name: 'AddPaymentForm',
+      component: AddPaymentForm
     },
     {
       path: '/about*',
@@ -48,7 +59,6 @@ const router = new Router({
 router.afterEach((to, from) => {
   console.log(from, to)
   document.title = to.params.category
-  // this.routeShow = to.params.category
 })
 
 export default router

@@ -3,6 +3,7 @@
     <header class="header">
       <router-link to="/dashboardWithPage">dashboard with page</router-link>
       <router-link to="/dashboard">dashboard</router-link>
+      <!-- <router-link to="/add/payment">add payment</router-link> -->
       <router-link to="/about">about</router-link>
       <!-- <a href="dashboard">dashboard</a>
       <a href="about">about</a>
@@ -13,9 +14,9 @@
       <router-view />
       <div class="templates">
         <h3>Add frequent payments:</h3>
-        <router-link to="/dashboard/add/payment/Food/?value=200">Category <span>"Food"</span> and amount <span>200</span></router-link>
-        <router-link to="/dashboard/add/payment/Transport/?value=50">Category <span>"Transport"</span> and amount <span>50</span></router-link>
-        <router-link to="/dashboard/add/payment/Clothes/?value=3000">Category <span>"Clothes"</span> and amount <span>3000</span></router-link>
+        <router-link to="/add/payment/Food/?value=200">Category <span>"Food"</span> and amount <span>200</span></router-link>
+        <router-link to="/add/payment/Transport/?value=50">Category <span>"Transport"</span> and amount <span>50</span></router-link>
+        <router-link to="/add/payment/Clothes/?value=3000">Category <span>"Clothes"</span> and amount <span>3000</span></router-link>
       </div>
       <!-- <Dashboadr v-if="page === 'dashboard'" />
       <About v-if="page === 'about'" />
@@ -69,7 +70,8 @@ export default {
     // })
   },
   created () {
-    this.$store.dispatch('fetchDataForPage')
+    this.$store.dispatch('fetchData')
+    // this.$store.dispatch('fetchDataForPage')
     this.$store.dispatch('fetchCategoryList')
   }
 }

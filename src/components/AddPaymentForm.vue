@@ -16,16 +16,14 @@
 </template>
 
 <script>
+// import { mapGetters } from 'vuex'
+
 export default {
   name: 'AddPaymentForm',
   props: {
     // itemId: {
     //   type: Number
     // }
-    categoryList: {
-      type: Array,
-      default: () => []
-    }
   },
   data () {
     return {
@@ -44,6 +42,9 @@ export default {
       const m = today.getMonth() + 1
       const y = today.getFullYear()
       return `${d}.${m}.${y}`
+    },
+    categoryList () {
+      return this.$store.getters.getCategoryList
     }
   },
   methods: {
@@ -54,6 +55,7 @@ export default {
         category: this.category,
         amount: this.amount
       }
+      this.$router.push('/dashboard')
       this.$emit('emitName', data)
       this.date = ''
       this.category = ''

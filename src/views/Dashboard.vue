@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AddPaymentForm @emitName="methodName" :categoryList="getCategoryList" :routeShow="routeShow" />
+    <AddPaymentForm @emitName="methodName" />
+    <!-- :categoryList="getCategoryList"  -->
     <PaymentsDisplay :items="paymentsList" />
   </div>
 </template>
@@ -14,11 +15,10 @@ export default {
   components: { AddPaymentForm, PaymentsDisplay },
   name: 'Dashboard',
   data: () => ({
-    routeShow: false
   }),
   computed: {
     ...mapGetters([
-      'getCategoryList'
+      // 'getCategoryList'
     ]),
     paymentsList () {
       return this.$store.getters.getPaymentsList
@@ -36,7 +36,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('fetchData')
+    // this.$store.dispatch('fetchData')
     this.$store.dispatch('fetchCategoryList')
   }
 }

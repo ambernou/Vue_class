@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AddPaymentForm @emitName="methodName" :categoryList="getCategoryList" />
+    <AddPaymentForm @emitName="methodName"/>
+    <!-- :categoryList="getCategoryList" -->
     <PaymentsDisplay :items="paymentsList" />
     <Pagination :pages="pages" :curPage="curPage" @emitPaginate="changePage" />
   </div>
@@ -47,7 +48,6 @@ export default {
     }
   },
   created () {
-    // this.$store.dispatch('fetchData')
     this.$store.dispatch('fetchDataForPage')
     this.$store.dispatch('fetchCategoryList')
   }
