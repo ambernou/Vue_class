@@ -3,7 +3,6 @@
     <header class="header">
       <router-link to="/dashboardWithPage">dashboard with page</router-link>
       <router-link to="/dashboard">dashboard</router-link>
-      <!-- <router-link to="/add/payment">add payment</router-link> -->
       <router-link to="/about">about</router-link>
       <!-- <a href="dashboard">dashboard</a>
       <a href="about">about</a>

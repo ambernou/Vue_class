@@ -106,7 +106,7 @@ export default new Vuex.Store({
     // },
     // getPaymentsListId: state => {
     //   state.itemId = state.paymentsList[state.paymentsList.length - 1].id
-    //   return state.itemId
+    //   console.log(state.itemId)
     // },
     getCategoryList: state => state.categoryList,
     getPageList: state => state.pageList,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AddPaymentForm @emitName="methodName" />
+    <AddPaymentForm />
     <!-- :categoryList="getCategoryList"  -->
     <PaymentsDisplay :items="paymentsList" />
   </div>
@@ -25,15 +25,15 @@ export default {
     }
     // itemId () {
     //   return this.$store.getters.getPaymentsListId
-    // },
+    // }
   },
   methods: {
     ...mapMutations([
       'setPaymentsListData'
-    ]),
-    methodName (data) {
-      this.$store.commit('addDataToPaymentsList', data)
-    }
+    ])
+    // methodName (data) {
+    //   this.$store.commit('addDataToPaymentsList', data)
+    // }
   },
   created () {
     // this.$store.dispatch('fetchData')

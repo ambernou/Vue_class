@@ -16,23 +16,10 @@ const router = new Router({
       name: 'Dashboard',
       component: Dashboard
     },
-    // {
-    //   path: '/dashboard/add/payment/:category',
-    //   name: 'Dashboard',
-    //   component: Dashboard,
-    //   props: {
-    //     routeShow: ''
-    //   }
-    // },
     {
       path: '/dashboardWithPage',
       name: 'DashboardWithPage',
       component: DashboardWithPage
-    },
-    {
-      path: '/add/payment',
-      name: 'AddPaymentForm',
-      component: AddPaymentForm
     },
     {
       path: '/add/payment/:category',
@@ -56,9 +43,9 @@ const router = new Router({
   ]
 })
 
-router.afterEach((to, from) => {
-  console.log(from, to)
-  document.title = to.params.category
-})
+// router.afterEach((to, from) => {
+//   console.log(from, to)
+//   document.title = to.params.category
+// })
 
 export default router

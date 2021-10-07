@@ -8,31 +8,29 @@
           {{ option }}
         </option>
       </select>
-      <!-- <input placeholder="Payment category" v-model="category" class="input_field" /> -->
       <input placeholder="Payment amount" v-model="amount" class="input_field" />
-      <button @click="onSaveClick" class="add_btn" :disabled="btnDisabled">ADD +</button>
+      <button @click="onSaveClick" class="add_btn">ADD +</button>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
 
 export default {
   name: 'AddPaymentForm',
-  props: {
-    // itemId: {
-    //   type: Number
-    // }
-  },
+  // props: {
+  //   itemId: {
+  //     type: Number
+  //   }
+  // },
   data () {
     return {
       // id: this.itemId,
       date: '',
       category: '',
       amount: '',
-      showAddNewPayment: false,
-      btnDisabled: false
+      showAddNewPayment: false
+      // btnDisabled: true
     }
   },
   computed: {
@@ -55,15 +53,20 @@ export default {
         category: this.category,
         amount: this.amount
       }
-      this.$router.push('/dashboard')
-      this.$emit('emitName', data)
-      this.date = ''
-      this.category = ''
-      this.amount = ''
+      this.addData(data)
+      if (this.$route.path.includes('/add/payment/')) {
+        this.$router.push('/dashboard')
+      } else {
+        this.date = ''
+        this.category = ''
+        this.amount = ''
+      }
     },
     showBtn () {
       this.showAddNewPayment = !this.showAddNewPayment
-      // console.log(this.showAddNewPayment)
+    },
+    addData (data) {
+      this.$store.commit('addDataToPaymentsList', data)
     }
   },
   created () {
