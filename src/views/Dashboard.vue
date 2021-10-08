@@ -1,27 +1,37 @@
 <template>
   <div>
     <AddPaymentForm />
-    <!-- :categoryList="getCategoryList"  -->
-    <PaymentsDisplay :items="paymentsList" />
+    <PaymentsDisplay show-items :items="curentElements" />
+    <Pagination
+      :cur="page"
+      :n="n"
+      :length="getPaymentsList.length"
+      @paginate="changePage"
+    />
   </div>
 </template>
 
 <script>
 import AddPaymentForm from '../components/AddPaymentForm.vue'
 import PaymentsDisplay from '../components/PaymentsDisplay.vue'
+import Pagination from '../components/Pagination.vue'
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
-  components: { AddPaymentForm, PaymentsDisplay },
+  components: { AddPaymentForm, PaymentsDisplay, Pagination },
   name: 'Dashboard',
   data: () => ({
+    page: 1,
+    n: 15
   }),
   computed: {
-    ...mapGetters([
-      // 'getCategoryList'
-    ]),
+    ...mapGetters(['getPaymentsList', 'getPaymentsListId']),
     paymentsList () {
       return this.$store.getters.getPaymentsList
+    },
+    curentElements () {
+      const { n, page } = this
+      return this.paymentsList.slice(n * (page - 1), n * (page - 1) + n)
     }
     // itemId () {
     //   return this.$store.getters.getPaymentsListId
@@ -30,10 +40,10 @@ export default {
   methods: {
     ...mapMutations([
       'setPaymentsListData'
-    ])
-    // methodName (data) {
-    //   this.$store.commit('addDataToPaymentsList', data)
-    // }
+    ]),
+    changePage (p) {
+      this.page = p
+    }
   },
   created () {
     // this.$store.dispatch('fetchData')

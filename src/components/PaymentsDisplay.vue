@@ -18,6 +18,10 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    showItems: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

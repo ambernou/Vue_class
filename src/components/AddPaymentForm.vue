@@ -18,19 +18,12 @@
 
 export default {
   name: 'AddPaymentForm',
-  // props: {
-  //   itemId: {
-  //     type: Number
-  //   }
-  // },
   data () {
     return {
-      // id: this.itemId,
       date: '',
       category: '',
       amount: '',
       showAddNewPayment: false
-      // btnDisabled: true
     }
   },
   computed: {
@@ -43,12 +36,15 @@ export default {
     },
     categoryList () {
       return this.$store.getters.getCategoryList
+    },
+    itemId () {
+      return this.$store.getters.getPaymentsListId
     }
   },
   methods: {
     onSaveClick () {
       const data = {
-        // id: ++this.id,
+        id: this.itemId + 1,
         date: this.date || this.getCurrentDate,
         category: this.category,
         amount: this.amount
