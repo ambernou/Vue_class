@@ -10,7 +10,7 @@
       </select>
       <input placeholder="Payment amount" v-model="amount" class="input_field" />
       <button @click="onSaveClick" class="add_btn">ADD +</button>
-      <button @click="onSaveChangeClick" class="add_btn">Save change</button>
+      <!-- <button @click="onSaveChangeClick" class="add_btn">Save change</button> -->
     </div>
   </div>
 </template>
@@ -64,16 +64,16 @@ export default {
     // },
     addData (data) {
       this.$store.commit('addDataToPaymentsList', data)
-    },
-    onSaveChangeClick () {
-      const data = {
-        date: this.date || this.getCurrentDate,
-        category: this.category,
-        amount: Number(this.amount)
-      }
-      this.$store.commit('changePayment', data)
-      // console.log('change')
     }
+    // onSaveChangeClick () {
+    //   const data = {
+    //     date: this.date || this.getCurrentDate,
+    //     category: this.category,
+    //     amount: Number(this.amount)
+    //   }
+    //   this.$store.commit('changePayment', data)
+    //   // console.log('change')
+    // }
   },
   created () {
     if (this.$route.path.includes('/add/payment/')) {

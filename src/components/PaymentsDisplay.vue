@@ -53,7 +53,7 @@ export default {
       this.$context.close()
     },
     actionChangePayment (item) {
-      this.$modal.show({ title: 'EDIT PAYMENT', content: 'addPaymentForm' })
+      this.$modal.show({ title: 'EDIT PAYMENT', content: 'changePaymentForm' })
       this.$store.commit('saveOldDataForPayment', item)
       this.$context.close()
       // console.log(item)

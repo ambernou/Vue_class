@@ -8,7 +8,7 @@ export default new Vuex.Store({
     paymentsList: [],
     categoryList: [],
     itemId: 0,
-    oldDataForPayment: {},
+    oldDataForChangePayment: {},
     indexOfOldPayment: 0
   },
   mutations: {
@@ -26,12 +26,12 @@ export default new Vuex.Store({
       state.paymentsList.splice(elPos, 1)
     },
     saveOldDataForPayment (state, payload) {
-      state.oldDataForPayment = payload
+      state.oldDataForChangePayment = payload
       state.indexOfOldPayment = state.paymentsList.indexOf(payload)
-    },
-    changePayment (state, payload) {
-      state.paymentsList.splice(state.indexOfOldPayment, 1, { id: state.oldDataForPayment.id, date: payload.date, category: payload.category, amount: payload.amount })
     }
+    // changePayment (state, payload) {
+    //   state.paymentsList.splice(state.indexOfOldPayment, 1, { id: state.oldDataForChangePayment.id, date: payload.date, category: payload.category, amount: payload.amount })
+    // }
   },
   actions: {
     fetchData ({ commit }) {
@@ -73,6 +73,7 @@ export default new Vuex.Store({
     //   return state.paymentsList.reduce((res, cur) => res + cur.amount, 0)
     // },
     getPaymentsListId: state => state.paymentsList[state.paymentsList.length - 1].id,
-    getCategoryList: state => state.categoryList
+    getCategoryList: state => state.categoryList,
+    getOldPayment: state => state.oldDataForChangePayment
   }
 })

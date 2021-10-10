@@ -5,6 +5,7 @@
     <div class="content">
       <AddPaymentForm v-if="settings.content === 'addPaymentForm'"/>
       <Auth v-if="settings.content === 'auth'"/>
+      <ChangePaymentForm v-if="settings.content === 'changePaymentForm'"/>
       <div class="footer">
         <button @click="onCloseClick">Close</button>
       </div>
@@ -15,9 +16,10 @@
 <script>
 import AddPaymentForm from './AddPaymentForm.vue'
 import Auth from './Auth.vue'
+import ChangePaymentForm from './ChangePaymentForm.vue'
 
 export default {
-  components: { AddPaymentForm, Auth },
+  components: { AddPaymentForm, Auth, ChangePaymentForm },
   name: 'ModalWindowAddPayment',
   props: {
     settings: Object
