@@ -28,10 +28,10 @@ export default new Vuex.Store({
     saveOldDataForPayment (state, payload) {
       state.oldDataForChangePayment = payload
       state.indexOfOldPayment = state.paymentsList.indexOf(payload)
+    },
+    changePayment (state, payload) {
+      state.paymentsList.splice(state.indexOfOldPayment, 1, { id: state.oldDataForChangePayment.id, date: payload.date, category: payload.category, amount: payload.amount })
     }
-    // changePayment (state, payload) {
-    //   state.paymentsList.splice(state.indexOfOldPayment, 1, { id: state.oldDataForChangePayment.id, date: payload.date, category: payload.category, amount: payload.amount })
-    // }
   },
   actions: {
     fetchData ({ commit }) {

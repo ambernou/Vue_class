@@ -1,14 +1,14 @@
 <template>
   <div class="form_box">
     <div class="form">
-      <input placeholder="Payment date" v-model="oldData.date" class="input_field" />
-      <select v-model="oldData.category" class="input_field">
+      <input placeholder="Payment date" v-model="date" class="input_field" />
+      <select v-model="category" class="input_field">
         <option v-for="option in categoryList" :key="option">
           {{ option }}
         </option>
       </select>
-      <input placeholder="Payment amount" v-model="oldData.amount" class="input_field" />
-      <!-- <button @click="onSaveChangeClick" class="add_btn">Save change</button> -->
+      <input placeholder="Payment amount" v-model="amount" class="input_field" />
+      <button @click="onSaveChangeClick" class="add_btn">Save change</button>
     </div>
   </div>
 </template>
@@ -17,13 +17,14 @@
 
 export default {
   name: 'AddPaymentForm',
-  // data () {
-  //   return {
-  //     date: '',
-  //     category: '',
-  //     amount: ''
-  //   }
-  // },
+  data () {
+    return {
+      date: '',
+      category: '',
+      amount: '',
+      id: ''
+    }
+  },
   computed: {
     getCurrentDate () {
       const today = new Date()
@@ -40,15 +41,20 @@ export default {
     }
   },
   methods: {
-    // onSaveChangeClick () {
-    //   const data = {
-    //     date: this.date || this.getCurrentDate,
-    //     category: this.category,
-    //     amount: Number(this.amount)
-    //   }
-    //   this.$store.commit('changePayment', data)
-    //   // console.log('change')
-    // }
+    onSaveChangeClick () {
+      const data = {
+        date: this.date,
+        category: this.category,
+        amount: Number(this.amount)
+      }
+      this.$store.commit('changePayment', data)
+      // console.log('change')
+    }
+  },
+  mounted () {
+    this.date = this.oldData.date
+    this.category = this.oldData.category
+    this.amount = this.oldData.amount
   },
   created () {
   }
