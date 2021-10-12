@@ -1,22 +1,17 @@
 <template>
   <div class='calc'>
     <div class='display'>
-        <input v-model.number='operand1' type='number' />
-        <input v-model.number='operand2' type='number' />
+        <input v-model.number='operand1' type='number' name='operand1' />
+        <input v-model.number='operand2' type='number' name='operand2' />
         = {{ result }}
     </div>
     <div class='keyboard'>
-        <!-- <button @click="calculate('+')">+</button>
-        <button @click="calculate('-')">-</button>
-        <button @click="calculate('*')">*</button>
-        <button @click="calculate('/')">/</button>
-        <button @click="calculate('a^b')">a<sup>b</sup></button>
-        <button @click="calculate('div')">div</button> -->
       <button
         v-for="operand in operands"
         @click="calculate(operand)"
         v-bind:key="operand"
         v-bind:title="operand"
+        v-bind:name="operand"
       >
         {{ operand }}
       </button>
@@ -103,7 +98,7 @@ export default {
       if (operand2 === 0) {
         this.error = 'Делить на 0 нельзя!'
       } else {
-        this.result = (operand1 / operand2).toFixed(4)
+        this.result = Number((operand1 / operand2).toFixed(4))
       }
     },
     exp () {
@@ -118,13 +113,13 @@ export default {
           this.result = this.result * operand1
         }
       } else if (operand2 === -1) {
-        this.result = (1 / operand1).toFixed(4)
+        this.result = Number((1 / operand1).toFixed(4))
       } else if (operand2 < -1) {
         this.result = operand1
         for (let i = -2; i >= operand2; i--) {
           this.result = this.result * operand1
         }
-        this.result = (1 / this.result).toFixed(4)
+        this.result = Number((1 / this.result).toFixed(4))
       }
     },
     intDiv () {
