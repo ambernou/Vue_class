@@ -20,7 +20,7 @@
     <!-- <div v-show="error">Ошибка! {{ error }}</div> -->
     <div class="screen_keyboard">
       <br />
-      <input type="checkbox" id="checkbox" v-model="checked" />
+      <input type="checkbox" id="checkbox" v-model="checked" name="screenKeyboard" />
       <label for="checkbox">Отобразить экранную клавиатуру</label>
       <br />
       <div v-show="checked">
@@ -28,14 +28,15 @@
           v-for="key in keys"
           v-bind:key="key"
           v-bind:title="key"
+          v-bind:name="key"
           @click="inputOperand(key, checkedOperand)"
         >
           {{ key }}
         </button>
         <br />
-        <input type="radio" id="op1" v-model="checkedOperand" value="1" />
+        <input type="radio" id="op1" v-model="checkedOperand" value="1" name="checkedOperand1" />
         <label for="op1">Операнд 1</label>
-        <input type="radio" id="op2" v-model="checkedOperand" value="2" />
+        <input type="radio" id="op2" v-model="checkedOperand" value="2" name="checkedOperand2" />
         <label for="op2">Операнд 2</label>
       </div>
     </div>
