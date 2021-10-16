@@ -1,18 +1,20 @@
 <template>
-    <div>
-        <table>
-            <tr class="table_header">
-                <td>#</td><td>Date</td><td>Category</td><td>Amount</td>
-            </tr>
-            <tr v-for="item in items" :key="item.id">
-                <td>{{ item.id }}</td>
-                <td>{{ item.date }}</td>
-                <td>{{ item.category }}</td>
-                <td>{{ item.amount }}</td>
-                <td @click="onClickContextMenu($event, item)" class="context_menu_element"><i class="fas fa-ellipsis-v"></i></td>
-            </tr>
-        </table>
-    </div>
+  <v-container>
+    <v-row>
+      <v-col :cols="1">#</v-col>
+      <v-col :cols="4">Date</v-col>
+      <v-col :cols="4">Category</v-col>
+      <v-col :cols="2">Amount</v-col>
+      <v-col :cols="1"></v-col>
+    </v-row>
+    <v-row v-for="item in items" :key="item.id">
+      <v-col :cols="1">{{ item.id }}</v-col>
+      <v-col :cols="4">{{ item.date }}</v-col>
+      <v-col :cols="4">{{ item.category }}</v-col>
+      <v-col :cols="2">{{ item.amount }}</v-col>
+      <v-col :cols="1" @click="onClickContextMenu($event, item)"><v-icon>mdi-dots-vertical</v-icon></v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

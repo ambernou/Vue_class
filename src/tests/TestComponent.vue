@@ -6,7 +6,7 @@
 export default {
   name: 'TestComponent',
   props: {
-      message: String
+    message: String
   }
 }
 </script>

@@ -1,25 +1,27 @@
 <template>
-  <div>
-    <!-- <AddPaymentForm /> -->
-    <PaymentsDisplay show-items :items="curentElements" />
-    <Pagination
-      :cur="page"
-      :n="n"
-      :length="getPaymentsList.length"
-      @paginate="changePage"
-    />
-    <button @click="addPayment">ADD NEW PAYMENT +</button>
-    <!-- <modal-window-add-payment @close="onModalClose" v-if="modalIsShow" :settings="modalSettings" />
-    <button @click="openPayment">ADD NEW PAYMENT +</button>
-    <button @click="openAuth">Auth Form</button> -->
-    <!-- <router-view /> -->
-    <div class="templates">
-        <h3>Add frequent payments:</h3>
+  <v-container>
+    <v-row>
+      <v-col>
+        <div class="text-h4 text-sm-h3 mb-8">My Personal costs</div>
+        <v-btn color="teal" dark>
+          ADD NEW COST <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        <PaymentsDisplay show-items :items="curentElements" />
+        <Pagination
+          :cur="page"
+          :n="n"
+          :length="getPaymentsList.length"
+          @paginate="changePage"
+        />
+        <button @click="addPayment">ADD NEW PAYMENT +</button>
         <router-link to="/add/payment/Food/?value=200">Category <span>"Food"</span> and amount <span>200</span></router-link>
         <router-link to="/add/payment/Transport/?value=50">Category <span>"Transport"</span> and amount <span>50</span></router-link>
         <router-link to="/add/payment/Clothes/?value=3000">Category <span>"Clothes"</span> and amount <span>3000</span></router-link>
-      </div>
-  </div>
+      </v-col>
+      <v-col>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
