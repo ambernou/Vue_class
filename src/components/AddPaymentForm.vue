@@ -1,18 +1,10 @@
 <template>
-  <div class="form_box">
-    <!-- <button class="add_btn" @click="showBtn">ADD NEW PAYMENT +</button> -->
-    <div class="form">
-      <input placeholder="Payment date" v-model="date" class="input_field" />
-      <select v-model="category" class="input_field">
-        <option v-for="option in categoryList" :key="option">
-          {{ option }}
-        </option>
-      </select>
-      <input placeholder="Payment amount" v-model="amount" class="input_field" />
-      <button @click="onSaveClick" class="add_btn">ADD +</button>
-      <!-- <button @click="onSaveChangeClick" class="add_btn">Save change</button> -->
-    </div>
-  </div>
+ <v-card class="text-left pa-8">
+    <v-text-field v-model="date" label="Date" />
+    <v-select v-model="category" label="Category" :items="categoryList" />
+    <v-text-field v-model="amount" label="Payment amount" />
+    <v-btn @click="onSaveClick" color="teal" dark>ADD +</v-btn>
+ </v-card>
 </template>
 
 <script>
@@ -24,7 +16,6 @@ export default {
       date: '',
       category: '',
       amount: ''
-      // showAddNewPayment: false
     }
   },
   computed: {
@@ -59,21 +50,9 @@ export default {
         this.amount = ''
       }
     },
-    // showBtn () {
-    //   this.showAddNewPayment = !this.showAddNewPayment
-    // },
     addData (data) {
       this.$store.commit('addDataToPaymentsList', data)
     }
-    // onSaveChangeClick () {
-    //   const data = {
-    //     date: this.date || this.getCurrentDate,
-    //     category: this.category,
-    //     amount: Number(this.amount)
-    //   }
-    //   this.$store.commit('changePayment', data)
-    //   // console.log('change')
-    // }
   },
   created () {
     if (this.$route.path.includes('/add/payment/')) {
@@ -82,12 +61,6 @@ export default {
       this.category = this.$route.params.category
       this.amount = this.$route.query.value
     }
-    // if (this.data) {
-    //   const { date, category, amount } = this.data
-    //   this.date = date
-    //   this.category = category || ''
-    //   this.amount = Number(amount)
-    // }
   }
 }
 </script>
