@@ -1,19 +1,43 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col :cols="1">#</v-col>
-      <v-col :cols="4">Date</v-col>
-      <v-col :cols="4">Category</v-col>
-      <v-col :cols="2">Amount</v-col>
-      <v-col :cols="1"></v-col>
-    </v-row>
-    <v-row v-for="item in items" :key="item.id">
-      <v-col :cols="1">{{ item.id }}</v-col>
-      <v-col :cols="4">{{ item.date }}</v-col>
-      <v-col :cols="4">{{ item.category }}</v-col>
-      <v-col :cols="2">{{ item.amount }}</v-col>
-      <v-col :cols="1" @click="onClickContextMenu($event, item)"><v-icon>mdi-dots-vertical</v-icon></v-col>
-    </v-row>
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="font-weight-bold">Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in items" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.amount }}</td>
+            <td>
+              <v-menu width="200px" offset-y>
+                <template v-slot:activator="{on}">
+                  <v-btn plain v-on="on">
+                    <v-icon>mdi-dots-vertical</v-icon>
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item @click="actionEdit(item)">
+                    <v-list-item-title><v-icon>mdi-pencil</v-icon> Edit</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="actionDelete(item)">
+                    <v-list-item-title><v-icon>mdi-delete</v-icon> Delete</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </v-container>
 </template>
 
@@ -30,7 +54,13 @@ export default {
       default: false
     }
   },
+  data: () => ({
+    optionsDialog: false
+  }),
   methods: {
+    actionEdit (item) {
+      console.log(item)
+    },
     onClickContextMenu (event, item) {
       const items = [
         {
@@ -52,7 +82,7 @@ export default {
     },
     actionDelete (item) {
       this.$store.commit('deletePayment', item)
-      this.$context.close()
+      // this.$context.close()
     },
     actionChangePayment (item) {
       this.$modal.show({ title: 'EDIT PAYMENT', content: 'changePaymentForm' })

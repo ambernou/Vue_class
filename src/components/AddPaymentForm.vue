@@ -42,25 +42,21 @@ export default {
         amount: Number(this.amount)
       }
       this.addData(data)
-      if (this.$route.path.includes('/add/payment/')) {
-        this.$router.push('/dashboard')
-      } else {
-        this.date = ''
-        this.category = ''
-        this.amount = ''
-      }
+      this.date = ''
+      this.category = ''
+      this.amount = ''
     },
     addData (data) {
       this.$store.commit('addDataToPaymentsList', data)
     }
   },
   created () {
-    if (this.$route.path.includes('/add/payment/')) {
-      this.showAddNewPayment = true
-      this.date = this.getCurrentDate
-      this.category = this.$route.params.category
-      this.amount = this.$route.query.value
-    }
+    // if (this.$route.path.includes('/add/payment/')) {
+    //   this.showAddNewPayment = true
+    //   this.date = this.getCurrentDate
+    //   this.category = this.$route.params.category
+    //   this.amount = this.$route.query.value
+    // }
   }
 }
 </script>

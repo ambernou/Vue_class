@@ -15,9 +15,24 @@
           </v-card>
         </v-dialog>
         <PaymentsDisplay show-items :items="curentElements" />
+        <!-- <Pagination
+          :cur="page"
+          :n="n"
+          :length="getPaymentsList.length"
+          @paginate="changePage"
+        /> -->
         <div class="text-center">
           <v-pagination v-model="page" :length="amountPage"></v-pagination>
         </div>
+        <v-data-table
+          :headers="headers"
+          :items="curentElements"
+        >
+        </v-data-table>
+        <!-- <button @click="addPayment">ADD NEW PAYMENT +</button>
+        <router-link to="/add/payment/Food/?value=200">Category <span>"Food"</span> and amount <span>200</span></router-link>
+        <router-link to="/add/payment/Transport/?value=50">Category <span>"Transport"</span> and amount <span>50</span></router-link>
+        <router-link to="/add/payment/Clothes/?value=3000">Category <span>"Clothes"</span> and amount <span>3000</span></router-link> -->
       </v-col>
       <v-col>
       </v-col>
@@ -27,6 +42,7 @@
 
 <script>
 import PaymentsDisplay from '../components/PaymentsDisplay.vue'
+// import Pagination from '../components/Pagination.vue'
 import { mapMutations, mapGetters } from 'vuex'
 import AddPaymentForm from '../components/AddPaymentForm.vue'
 // import ModalWindowAddPayment from '../components/ModalWindowAddPayment.vue'
@@ -37,7 +53,13 @@ export default {
   data: () => ({
     page: 1,
     n: 7,
-    dialog: false
+    dialog: false,
+    headers: [
+      { text: 'ID', value: 'id' },
+      { text: 'Date', value: 'date' },
+      { text: 'Category', value: 'category' },
+      { text: 'Amount', value: 'amount' }
+    ]
   }),
   //   watch: {
   //     $route (to, from) {

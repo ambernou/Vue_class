@@ -1,16 +1,10 @@
 <template>
-  <div class="form_box">
-    <div class="form">
-      <input placeholder="Payment date" v-model="date" class="input_field" />
-      <select v-model="category" class="input_field">
-        <option v-for="option in categoryList" :key="option">
-          {{ option }}
-        </option>
-      </select>
-      <input placeholder="Payment amount" v-model="amount" class="input_field" />
-      <button @click="onSaveChangeClick" class="add_btn">Save change</button>
-    </div>
-  </div>
+ <v-card class="text-left pa-8">
+    <v-text-field v-model="date" label="Date" />
+    <v-select v-model="category" label="Category" :items="categoryList" />
+    <v-text-field v-model="amount" label="Payment amount" />
+    <v-btn @click="onSaveChangeClick" color="teal" dark>Save change</v-btn>
+ </v-card>
 </template>
 
 <script>
