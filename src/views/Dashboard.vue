@@ -20,6 +20,7 @@
         </div>
       </v-col>
       <v-col>
+        <BarChart :chartData="chartData" :options="options" :styles="chartStyle" />
       </v-col>
     </v-row>
   </v-container>
@@ -29,15 +30,42 @@
 import PaymentsDisplay from '../components/PaymentsDisplay.vue'
 import { mapMutations, mapGetters } from 'vuex'
 import AddPaymentForm from '../components/AddPaymentForm.vue'
+import BarChart from '../components/BarChart.vue'
 // import ModalWindowAddPayment from '../components/ModalWindowAddPayment.vue'
 
 export default {
-  components: { PaymentsDisplay, AddPaymentForm },
+  components: { PaymentsDisplay, AddPaymentForm, BarChart },
   name: 'Dashboard',
   data: () => ({
     page: 1,
     n: 7,
-    dialog: false
+    dialog: false,
+    chartData: {
+      labels: ['Yellow', 'Orange', 'Red', 'Green', 'Blue'],
+      datasets: [
+        {
+          label: 'Dataset1',
+          data: [5, 10, 15, 20, 50],
+          backgroundColor: ['Yellow', 'Orange', 'Red', 'Green', 'Blue']
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      height: '200px',
+      width: '200px',
+      legend: {
+        position: 'right'
+      },
+      title: {
+        display: true,
+        text: 'Costs by categories'
+      }
+    },
+    chartStyle: {
+      height: '300px',
+      width: '300px'
+    }
   }),
   //   watch: {
   //     $route (to, from) {
@@ -57,6 +85,9 @@ export default {
     },
     amountPage () {
       return Math.ceil(this.paymentsList.length / this.n)
+    },
+    categoryList () {
+      return this.$store.getters.getCategoryList
     }
   },
   methods: {
@@ -74,33 +105,10 @@ export default {
         this.dialog = false
       }
     }
-    // checkUrl () {
-    //   const { action, category, section } = this.$route.params
-    //   this.$modal.show({
-    //     title: 'ADD NEW PAYMENT +',
-    //     content: 'addPaymentForm',
-    //     data: {
-    //       action: action || '',
-    //       category: category || '',
-    //       section: section || '',
-    //       amount: this.$route.query?.value || ''
-    //     }
-    //   })
-    // }
   }
-  //   async created () {
-  //     if (this.$route.params.page) {
-  //       this.page = Number(this.$route.params.page)
-  //     }
-
-  //     await this.$store.dispatch('fetchData')
-  //     await this.$store.dispatch('fetchCategoryList')
-
-  //     if (this.$route.name === 'AddPaymentFormFromUrl') {
-  //       this.checkUrl()
-  //     }
-  // this.$store.dispatch('fetchData')
-  // this.$store.dispatch('fetchCategoryList')
+  // created () {
+  //   console.log(this.categoryList)
+  // }
 }
 </script>
 
