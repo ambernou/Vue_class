@@ -10,7 +10,7 @@
             </v-btn>
           </template>
           <v-card>
-            <add-payment-form />
+            <AddPaymentForm @closeDialog="tocloseDialog"/>
             <!-- <v-btn color="teal" dark @click="dialog=false">Close</v-btn> -->
           </v-card>
         </v-dialog>
@@ -68,6 +68,11 @@ export default {
     },
     addPayment () {
       this.$modal.show({ title: 'ADD NEW PAYMENT +', content: 'addPaymentForm' })
+    },
+    tocloseDialog (data) {
+      if (data === 'close') {
+        this.dialog = false
+      }
     }
     // checkUrl () {
     //   const { action, category, section } = this.$route.params

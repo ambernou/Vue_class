@@ -10,7 +10,7 @@
 <script>
 
 export default {
-  name: 'AddPaymentForm',
+  name: 'ChangePaymentForm',
   data () {
     return {
       date: '',
@@ -42,6 +42,7 @@ export default {
         amount: Number(this.amount)
       }
       this.$store.commit('changePayment', data)
+      this.$emit('closeDialog', 'close')
       // console.log('change')
     }
   },
@@ -56,26 +57,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form_box {
-  width: 400px;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-}
-.form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    background-color: white;
-}
-.add_btn {
-    width: 200px;
-    background-color: aqua;
-    margin-bottom: 16px;
-}
-.input_field {
-    margin-bottom: 8px;
-    height: 25px;
-}
 </style>

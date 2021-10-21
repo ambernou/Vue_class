@@ -25,8 +25,15 @@
                   </v-btn>
                 </template>
                 <v-list>
-                  <v-list-item @click="actionEdit(item)">
-                    <v-list-item-title><v-icon>mdi-pencil</v-icon> Edit</v-list-item-title>
+                  <v-list-item>
+                    <v-dialog v-model="dialog" width="500px">
+                      <template v-slot:activator="{on}">
+                        <v-list-item-title v-on="on" @click="actionEdit(item)"><v-icon>mdi-pencil</v-icon> Edit</v-list-item-title>
+                      </template>
+                      <v-card>
+                        <ChangePaymentForm @closeDialog="tocloseDialog" />
+                      </v-card>
+                    </v-dialog>
                   </v-list-item>
                   <v-list-item @click="actionDelete(item)">
                     <v-list-item-title><v-icon>mdi-delete</v-icon> Delete</v-list-item-title>
@@ -42,7 +49,9 @@
 </template>
 
 <script>
+import ChangePaymentForm from './ChangePaymentForm.vue'
 export default {
+  components: { ChangePaymentForm },
   name: 'PaymentsDisplay',
   props: {
     items: {
@@ -55,40 +64,22 @@ export default {
     }
   },
   data: () => ({
-    optionsDialog: false
+    dialog: false
   }),
   methods: {
     actionEdit (item) {
+      this.dialog = !this.dialog
+      this.$store.commit('saveOldDataForPayment', item)
       console.log(item)
-    },
-    onClickContextMenu (event, item) {
-      const items = [
-        {
-          text: 'Edit',
-          action: () => {
-            this.actionChangePayment(item)
-            // console.log('Edit', item.id)
-          }
-        },
-        {
-          text: 'Delete',
-          action: () => {
-            this.actionDelete(item)
-            // console.log('Delete id', item.id)
-          }
-        }
-      ]
-      this.$context.show({ event, items })
     },
     actionDelete (item) {
       this.$store.commit('deletePayment', item)
       // this.$context.close()
     },
-    actionChangePayment (item) {
-      this.$modal.show({ title: 'EDIT PAYMENT', content: 'changePaymentForm' })
-      this.$store.commit('saveOldDataForPayment', item)
-      this.$context.close()
-      // console.log(item)
+    tocloseDialog (data) {
+      if (data === 'close') {
+        this.dialog = false
+      }
     }
   }
 }

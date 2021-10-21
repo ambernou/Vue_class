@@ -48,6 +48,7 @@ export default {
     },
     addData (data) {
       this.$store.commit('addDataToPaymentsList', data)
+      this.$emit('closeDialog', 'close')
     }
   },
   created () {
