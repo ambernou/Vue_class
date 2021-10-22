@@ -20,7 +20,8 @@
         </div>
       </v-col>
       <v-col>
-        <BarChart :styles="chartStyle" :chartData="chartData" :options="options" />
+        <BarChart :styles="chartStyle" :key="paymentsList.length" />
+        <!-- :chartData="chartData" :options="options" -->
       </v-col>
     </v-row>
   </v-container>
@@ -40,26 +41,26 @@ export default {
     page: 1,
     n: 10,
     dialog: false,
-    chartData: {
-      labels: [],
-      datasets: [
-        {
-          label: 'Dataset1',
-          data: [],
-          backgroundColor: ['Yellow', 'Orange', 'Red', 'Green', 'Blue']
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      legend: {
-        position: 'right'
-      },
-      title: {
-        display: true,
-        text: 'Costs by categories'
-      }
-    },
+    // chartData: {
+    //   labels: [],
+    //   datasets: [
+    //     {
+    //       label: 'Dataset1',
+    //       data: [],
+    //       backgroundColor: ['Yellow', 'Orange', 'Red', 'Green', 'Blue']
+    //     }
+    //   ]
+    // },
+    // options: {
+    //   responsive: true,
+    //   legend: {
+    //     position: 'right'
+    //   },
+    //   title: {
+    //     display: true,
+    //     text: 'Costs by categories'
+    //   }
+    // },
     chartStyle: {
       height: '300px',
       width: '300px'
@@ -76,13 +77,13 @@ export default {
     },
     amountPage () {
       return Math.ceil(this.paymentsList.length / this.n)
-    },
-    categoryList () {
-      return this.$store.getters.getCategoryList
-    },
-    sumForCategory () {
-      return this.$store.getters.getSumForCategory
     }
+    // categoryList () {
+    //   return this.$store.getters.getCategoryList
+    // },
+    // sumForCategory () {
+    //   return this.$store.getters.getSumForCategory
+    // }
   },
   methods: {
     ...mapMutations([
@@ -98,17 +99,14 @@ export default {
       if (data === 'close') {
         this.dialog = false
       }
-    },
-    generateChart () {
-      this.chartData.labels = this.categoryList
-      this.chartData.datasets[0].data = this.sumForCategory
     }
-  },
-  mounted () {
-    this.generateChart()
+    // generateChart () {
+    //   this.chartData.labels = this.categoryList
+    //   this.chartData.datasets[0].data = this.sumForCategory
+    // }
   },
   created () {
-    this.generateChart()
+    // this.generateChart()
   }
 }
 </script>
