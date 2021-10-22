@@ -20,7 +20,7 @@
         </div>
       </v-col>
       <v-col>
-        <BarChart :chartData="chartData" :options="options" :styles="chartStyle" />
+        <BarChart :styles="chartStyle" :chartData="chartData" :options="options" />
       </v-col>
     </v-row>
   </v-container>
@@ -38,22 +38,20 @@ export default {
   name: 'Dashboard',
   data: () => ({
     page: 1,
-    n: 7,
+    n: 10,
     dialog: false,
     chartData: {
-      labels: ['Yellow', 'Orange', 'Red', 'Green', 'Blue'],
+      labels: [],
       datasets: [
         {
           label: 'Dataset1',
-          data: [5, 10, 15, 20, 50],
+          data: [],
           backgroundColor: ['Yellow', 'Orange', 'Red', 'Green', 'Blue']
         }
       ]
     },
     options: {
       responsive: true,
-      height: '200px',
-      width: '200px',
       legend: {
         position: 'right'
       },
@@ -67,13 +65,6 @@ export default {
       width: '300px'
     }
   }),
-  //   watch: {
-  //     $route (to, from) {
-  //       if (to.name === 'AddPaymentFormFromUrl') {
-  //         this.checkUrl()
-  //       }
-  //     }
-  //   },
   computed: {
     ...mapGetters(['getPaymentsList', 'getPaymentsListId']),
     paymentsList () {
@@ -88,6 +79,9 @@ export default {
     },
     categoryList () {
       return this.$store.getters.getCategoryList
+    },
+    sumForCategory () {
+      return this.$store.getters.getSumForCategory
     }
   },
   methods: {
@@ -104,11 +98,18 @@ export default {
       if (data === 'close') {
         this.dialog = false
       }
+    },
+    generateChart () {
+      this.chartData.labels = this.categoryList
+      this.chartData.datasets[0].data = this.sumForCategory
     }
+  },
+  mounted () {
+    this.generateChart()
+  },
+  created () {
+    this.generateChart()
   }
-  // created () {
-  //   console.log(this.categoryList)
-  // }
 }
 </script>
 

@@ -7,19 +7,7 @@
     </header>
     <main>
       <router-view />
-      <!-- <div class="templates">
-        <h3>Add frequent payments:</h3>
-        <router-link to="/add/payment/Food/?value=200">Category <span>"Food"</span> and amount <span>200</span></router-link>
-        <router-link to="/add/payment/Transport/?value=50">Category <span>"Transport"</span> and amount <span>50</span></router-link>
-        <router-link to="/add/payment/Clothes/?value=3000">Category <span>"Clothes"</span> and amount <span>3000</span></router-link>
-      </div> -->
     </main>
-    <transition name="fade">
-      <modal-window-add-payment v-if="modalIsShow" :settings="modalSettings" />
-    </transition>
-    <transition name="fade">
-      <ContextMenu />
-    </transition>
   </div>
 </template>
 
@@ -37,25 +25,6 @@ export default {
   computed: {
   },
   methods: {
-    // goToPage (pagename) {
-    //   this.$router.push({
-    //     name: pagename
-    //   })
-    // },
-    onShown (settings) {
-      console.log(settings)
-      this.modalSettings = settings
-      this.modalIsShow = true
-    },
-    onHide () {
-      console.log('hide')
-      this.modalSettings = {}
-      this.modalIsShow = false
-    }
-  },
-  mounted () {
-    this.$modal.EventBus.$on('onShown', this.onShown)
-    this.$modal.EventBus.$on('onHide', this.onHide)
   },
   created () {
     // console.log(this.$modal)

@@ -74,6 +74,20 @@ export default new Vuex.Store({
     // },
     getPaymentsListId: state => state.paymentsList[state.paymentsList.length - 1].id,
     getCategoryList: state => state.categoryList,
-    getOldPayment: state => state.oldDataForChangePayment
+    getOldPayment: state => state.oldDataForChangePayment,
+    getSumForCategory: state => {
+      const sumForCategory = []
+      state.categoryList.forEach(function (cat) {
+        let sum = 0
+        state.paymentsList.forEach(function (item) {
+          if (item.category === cat) {
+            sum += item.amount
+          }
+        })
+        sumForCategory.push(sum)
+      })
+      // console.log(sumForCategory)
+      return sumForCategory
+    }
   }
 })

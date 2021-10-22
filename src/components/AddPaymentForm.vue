@@ -52,12 +52,6 @@ export default {
     }
   },
   created () {
-    // if (this.$route.path.includes('/add/payment/')) {
-    //   this.showAddNewPayment = true
-    //   this.date = this.getCurrentDate
-    //   this.category = this.$route.params.category
-    //   this.amount = this.$route.query.value
-    // }
   }
 }
 </script>
