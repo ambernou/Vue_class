@@ -20,8 +20,8 @@
         </div>
       </v-col>
       <v-col>
-        <BarChart :styles="chartStyle" :key="paymentsList.length" />
-        <!-- :chartData="chartData" :options="options" -->
+        <BarChart :styles="chartStyle" />
+        <!-- :chartData="chartData" :options="options" :key="paymentsList.length" v-if="paymentsList.length > 0" -->
       </v-col>
     </v-row>
   </v-container>
@@ -104,10 +104,10 @@ export default {
     //   this.chartData.labels = this.categoryList
     //   this.chartData.datasets[0].data = this.sumForCategory
     // }
-  },
-  created () {
-    // this.generateChart()
   }
+  // mounted () {
+  //   this.generateChart()
+  // }
 }
 </script>
 

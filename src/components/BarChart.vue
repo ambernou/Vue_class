@@ -50,14 +50,21 @@ export default {
     }
   },
   mounted () {
+    this.generateChart()
     this.renderChart(this.chartData, this.options)
   },
-  created () {
-    this.generateChart()
+  //   created () {
+  //     this.generateChart()
+  //   }
+  watch: {
+    sumForCategory () {
+      console.log('data')
+      this.generateChart()
+      this.renderChart(this.chartData, this.options)
+    }
   }
 }
 </script>
 
 <style>
-
 </style>
